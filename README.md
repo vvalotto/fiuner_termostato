@@ -1,2 +1,2 @@
-# fiuner_termostato
-Ejemplo para el Curso de Ingenierría de Software en Sistemas Embebidos
+# termostato
+Ejemplo para el Curso de Ingeniería de Software en Sistemas Embebidos
