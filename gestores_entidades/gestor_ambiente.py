@@ -6,8 +6,6 @@ Clase que es la responsable de manejar la entidad Ambiente.
 """
 
 from agentes_sensores.proxy_sensor_temperatura import *
-from agentes_sensores.proxy_selector_temperatura import *
-from agentes_sensores.proxy_seteo_temperatura import *
 from entidades.ambiente import *
 from agentes_actuadores.visualizador_temperatura import *
 
@@ -22,8 +20,6 @@ class GestorAmbiente:
         self._ambiente = Ambiente()
         self._proxy_sensor_temperatura = ProxySensorTemperatura()
         self._visualizador_temperatura = VisualizadorTemperaturas()
-        self._selector_temperatura = SelectorTemperatura()
-        self._seteo_temperatura = SeteoTemperatura()
         return
 
     def leer_temperatura_ambiente(self):
