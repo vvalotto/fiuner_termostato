@@ -23,7 +23,17 @@ class Ambiente:
         self._temperatura_deseada = valor
         return
 
+    @property
+    def temperatura_a_mostrar(self):
+        return self._temperatura_a_mostrar
+
+    @temperatura_a_mostrar.setter
+    def temperatura_a_mostrar(self, valor):
+        self._temperatura_a_mostrar = valor
+        return
+
     def __init__(self):
         self._temperatura_ambiente = 0
         self._temperatura_deseada = 0
+        self._temperatura_a_mostrar = "ambiente"
         return

@@ -16,3 +16,4 @@ class VisualizadorTemperaturas:
     def mostrar_temperatura_deseada(temperatura_deseada):
         print(str(temperatura_deseada))
         return
+

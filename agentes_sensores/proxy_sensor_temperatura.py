@@ -7,13 +7,13 @@ del sensor de temperatura
 class ProxySensorTemperatura():
 
     def leer_temperatura(self):
-        '''
+        """
         Aqui lee desde la GPIO el valor que indica la bateria
-        :return:
-        '''
+
+        """
         try:
             archivo = open("temperatura", "r")
-            temperatura = archivo.read()
+            temperatura = int(archivo.read())
             archivo.close()
         except IOError:
             raise Exception("Error de Lectura de Sensor")
