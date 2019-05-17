@@ -53,10 +53,12 @@ class OperadorSecuencial:
         'Ciclo infinito que establece la secuencia de acciones' \
         'del termostato'
         while True:
+            # ----------------------------------------------------------------
             print("lee_bateria")
             self._bateria.nivel_de_carga = self._proxy_bateria.leer_carga()
             time.sleep(1)
 
+            # ----------------------------------------------------------------
             print("lee temperatura")
             try:
                 self._ambiente.temperatura_ambiente = self._proxy_sensor_temperatura.leer_temperatura()
@@ -64,6 +66,7 @@ class OperadorSecuencial:
                 self._ambiente.temperatura_ambiente = None
             time.sleep(1)
 
+            # ----------------------------------------------------------------
             print("revisa selector de temperatura")
             while self._selector_temperatura.obtener_selector() == "deseada":
                 self._ambiente.temperatura_a_mostrar = "deseada"
@@ -78,9 +81,10 @@ class OperadorSecuencial:
                     self._ambiente.temperatura_deseada += 1
                 if opcion == "disminuir":
                     self._ambiente.temperatura_deseada -= 1
-            self.ambiente.temperatura_a_mostrar = "ambiente"
+            self._ambiente.temperatura_a_mostrar = "ambiente"
             time.sleep(1)
 
+            # ----------------------------------------------------------------
             print("acciona climatizador")
             accion = None
             temperatura = ControladorTemperatura.comparar_temperatura(self._ambiente.temperatura_ambiente,
@@ -105,6 +109,7 @@ class OperadorSecuencial:
                 self._climatizador.proximo_estado(accion)
             time.sleep(1)
 
+            # ----------------------------------------------------------------
             print("Muestra estado")
             print("-------------- BATERIA -------------")
             self._visualizador_bateria.mostrar_tension(self._bateria.nivel_de_carga)
@@ -119,7 +124,7 @@ class OperadorSecuencial:
             print("------------------------------------")
             print("\n")
             print("------------ CLIMATIZADOR ----------")
-            elf._visualizador.mostrar_estado_climatizador(self._climatizador.estado)
+            self._visualizador_climatizador.mostrar_estado_climatizador(self._climatizador.estado)
             print("------------------------------------")
             print("\n")
             time.sleep(5)
