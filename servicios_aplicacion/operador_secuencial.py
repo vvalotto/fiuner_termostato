@@ -8,11 +8,19 @@ y procesos correspondientes
 """
 
 import time
-from gestores_entidades.gestor_bateria import *
-from gestores_entidades.gestor_ambiente import *
-from gestores_entidades.gestor_climatizador import *
-from servicios_aplicacion.selector_entrada import *
-from servicios_aplicacion.presentador import *
+
+from agentes_sensores.proxy_selector_temperatura import *
+from agentes_sensores.proxy_seteo_temperatura import *
+from agentes_sensores.proxy_sensor_temperatura import *
+from agentes_sensores.proxy_bateria import *
+from agentes_actuadores.visualizador_climatizador import *
+from agentes_actuadores.actuador_climatizador import *
+from agentes_actuadores.visualizador_temperatura import *
+from agentes_actuadores.visualizador_bateria import *
+from entidades.ambiente import *
+from entidades.bateria import *
+from entidades.climatizador import *
+from servicios_dominio.controlador_climatizador import *
 
 
 class OperadorSecuencial:
