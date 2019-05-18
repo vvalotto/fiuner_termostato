@@ -3,14 +3,15 @@ Es el componente responsable de mantener y gestionar el
 estado interno de la clase que representa la bateria real
 """
 
-from agentes_sensores.proxy_bateria import *
+
 from agentes_actuadores.visualizador_bateria import *
 from entidades.bateria import *
+from configurador.configurador import *
 
 
 class GestorBateria:
 
-    def __init__(self, tipo_proxy):
+    def __init__(self):
         """
         Inicializa el gestor que esta compuesto de:
         La clase que que obtiene la carga de la bateria desde la interfaz
@@ -18,12 +19,9 @@ class GestorBateria:
         la clase que expone visualmente el estado de la bateria
         """
         self._bateria = Bateria()
-
-        # Se cambia el constructor!!!!
-        if tipo_proxy == "archivo":
-            self._proxy_bateria = ProxyBateriaArchivo()
-        elif tipo_proxy == "socket":
-            self._proxy_bateria = ProxyBateriaSocket()
+        # En tiempo de ejecución se determina que clase será la que
+        # integrara el gestor
+        self._proxy_bateria = Configurador().configurar_proxy_bateria()
         self._visualizador_bateria = VisualizadorBateria()
         return
 

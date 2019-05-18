@@ -1,20 +1,22 @@
 """
-Segunda version: Nueva clase que lee de otra manera el dato de la bateria
-Se extiende a otra clase sin tocar la primera
+Tercera version: refactorizacion:
+Se crea un clase abstracta y se derivan sus implementaciones
+con las clases concretas que se corresponden
 """
 import socket
+from abc import ABCMeta, abstractmethod
 
 
-class ProxyBateriaArchivo():
+class AbsProxyBateria(metaclass=ABCMeta):
+
+    @abstractmethod
+    def leer_carga(self):
+        pass
 
 
-    @staticmethod
-    def leer_carga():
-        '''
-        Aqui lee desde la GPIO el valor que indica la bateria
-        :return:
-        '''
-        carga = None
+class ProxyBateriaArchivo(AbsProxyBateria):
+
+    def leer_carga(self):
 
         archivo = open("bateria", "r")
         carga = float(archivo.read())
@@ -22,15 +24,10 @@ class ProxyBateriaArchivo():
         return carga
 
 
-class ProxyBateriaSocket:
+class ProxyBateriaSocket(AbsProxyBateria):
 
+    def leer_carga(self):
 
-    @staticmethod
-    def leer_carga():
-        '''
-        Aqui lee desde la GPIO el valor que indica la bateria
-        :return:
-        '''
         carga = None
 
         servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -47,7 +44,7 @@ class ProxyBateriaSocket:
                     break
                 carga = float(datos.decode("utf-8"))
         except ConnectionError("Error en la lectura de la carga"):
-                conexion.close()
-                print("FIN")
+            conexion.close()
+            print("FIN")
 
         return carga
