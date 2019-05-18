@@ -42,7 +42,8 @@ class OperadorSecuencial:
         'del termostato'
         while True:
             print("lee_bateria")
-            self._gestor_bateria.verificar_nivel_de_carga()
+            # Se cambia el contrato!!!!
+            self._gestor_bateria.verificar_nivel_de_carga("socket")
             time.sleep(1)
 
             print("lee temperatura")
