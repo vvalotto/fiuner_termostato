@@ -22,7 +22,7 @@ class OperadorSecuencial:
         Arma la dependencia con las clases con las que va
         a trabajar
         """
-        self._gestor_bateria = GestorBateria()
+        self._gestor_bateria = GestorBateria("socket")
         self._gestor_ambiente = GestorAmbiente()
         self._gestor_climatizador = GestorClimatizador()
         self._selector = SelectorEntradaTemperatura(self._gestor_ambiente)
@@ -43,7 +43,7 @@ class OperadorSecuencial:
         while True:
             print("lee_bateria")
             # Se cambia el contrato!!!!
-            self._gestor_bateria.verificar_nivel_de_carga("socket")
+            self._gestor_bateria.verificar_nivel_de_carga()
             time.sleep(1)
 
             print("lee temperatura")
