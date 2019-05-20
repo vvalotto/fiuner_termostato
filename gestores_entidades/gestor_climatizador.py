@@ -4,16 +4,16 @@ estado interno de la clase que representa el climatizador real
 """
 
 from entidades.climatizador import *
-from agentes_actuadores.visualizador_climatizador import *
-from agentes_actuadores.actuador_climatizador import *
+from configurador.configurador import *
 from servicios_dominio.controlador_climatizador import *
+
 
 class GestorClimatizador:
 
     def __init__(self):
         self._climatizador = Climatizador()
-        self._actuador = ActuadorClimatizador()
-        self._visualizador = VisualizadorClimatizador()
+        self._actuador = Configurador().configurar_actuador_climatizador()
+        self._visualizador = Configurador().configurar_visualizador_climatizador()
         return
 
     def accionar_climatizador(self, ambiente):
