@@ -1,7 +1,7 @@
 """"
 Clase que respresenta el climatizador
 """
-import datetime
+
 from servicios_dominio.controlador_climatizador import *
 
 
@@ -36,6 +36,27 @@ class Climatizador:
         self._maquina_estado.append([["calentando", "apagar"], "apagado"])
         self._maquina_estado.append([["enfriando", "apagar"], "apagado"])
         return
+
+    def definir_accion(self, ambiente):
+        accion = None
+        temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
+                                                                  ambiente.temperatura_deseada)
+        if temperatura == "alta":
+            if self._estado == "apagado":
+                accion = "enfriar"
+            elif self._estado == "calentando":
+                accion = "apagar"
+            else:
+                accion = None
+        if temperatura == "baja":
+            if self._estado == "apagado":
+                accion = "calentar"
+            elif self._estado == "enfriando":
+                accion = "apagar"
+            else:
+                accion = None
+        print('accion:', accion)
+        return accion
 
 
 class Calefactor(Climatizador):
