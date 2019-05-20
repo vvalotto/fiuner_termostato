@@ -3,7 +3,6 @@ Es el componente responsable de mantener y gestionar el
 estado interno de la clase que representa el climatizador real
 """
 
-from entidades.climatizador import *
 from configurador.configurador import *
 from servicios_dominio.controlador_climatizador import *
 
@@ -11,7 +10,7 @@ from servicios_dominio.controlador_climatizador import *
 class GestorClimatizador:
 
     def __init__(self):
-        self._climatizador = Climatizador()
+        self._climatizador = Configurador.configurar_climatizador()
         self._actuador = Configurador().configurar_actuador_climatizador()
         self._visualizador = Configurador().configurar_visualizador_climatizador()
         return
@@ -32,7 +31,8 @@ class GestorClimatizador:
 
     def _definir_accion(self, ambiente):
         accion = None
-        temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente, ambiente.temperatura_deseada)
+        temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
+                                                                  ambiente.temperatura_deseada)
         if temperatura == "alta":
             if self._climatizador.estado == "apagado":
                 accion = "enfriar"

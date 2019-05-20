@@ -1,6 +1,8 @@
 """"
 Clase que respresenta el climatizador
 """
+import datetime
+from servicios_dominio.controlador_climatizador import *
 
 
 class Climatizador:
@@ -13,6 +15,8 @@ class Climatizador:
         self._estado = "apagado"
         self._maquina_estado = []
         self._inicializar_maquina_estado()
+        self._funcionamiento_acumulado = 0
+        self._inicio_funcionamiento = None
         return
 
     def proximo_estado(self, accion):
@@ -31,4 +35,14 @@ class Climatizador:
         self._maquina_estado.append([["apagado", "enfriar"], "enfriando"])
         self._maquina_estado.append([["calentando", "apagar"], "apagado"])
         self._maquina_estado.append([["enfriando", "apagar"], "apagado"])
+        return
+
+
+class Calefactor(Climatizador):
+
+    # sobreescribe el metodo que especializa
+    def _inicializar_maquina_estado(self):
+        self._maquina_estado.append([["apagado", "calentar"], "calentando"])
+        self._maquina_estado.append([["apagado", "enfriar"], "apagado"])
+        self._maquina_estado.append([["calentando", "apagar"], "apagado"])
         return
