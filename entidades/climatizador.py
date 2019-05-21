@@ -38,11 +38,25 @@ class Climatizador:
         return
 
     def evaluar_accion(self, ambiente):
-        accion = None
-
-        temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
+        """
+        Este metodo es muy problematico!!!
+        Evalua el tipo para decidir como debe comportarse!!
+        """
+        if isinstance(self, Climatizador):
+            if self._funcionamiento_acumulado < 120:
+                temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
                                                                           ambiente.temperatura_deseada)
-        accion = self._definir_accion(temperatura)
+                accion = self._definir_accion(temperatura)
+                self._acumular_funcionamiento(accion)
+            else:
+                accion = "apagar"
+                self._funcionamiento_acumulado = 0
+                self._inicio_funcionamiento = None
+
+        elif isinstance(self, Calefactor):
+            temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
+                                                                      ambiente.temperatura_deseada)
+            accion = self._definir_accion(temperatura)
         return accion
 
     def _definir_accion(self, temperatura):
@@ -62,6 +76,12 @@ class Climatizador:
                 accion = None
         print('accion:', accion)
         return accion
+
+    def _acumular_funcionamiento(self, accion):
+        """
+        Cuerpo del metodo
+        """
+        return
 
 
 class Calefactor(Climatizador):
