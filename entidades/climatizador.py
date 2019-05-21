@@ -37,10 +37,15 @@ class Climatizador:
         self._maquina_estado.append([["enfriando", "apagar"], "apagado"])
         return
 
-    def definir_accion(self, ambiente):
+    def evaluar_accion(self, ambiente):
         accion = None
+
         temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
-                                                                  ambiente.temperatura_deseada)
+                                                                          ambiente.temperatura_deseada)
+        accion = self._definir_accion(temperatura)
+        return accion
+
+    def _definir_accion(self, temperatura):
         if temperatura == "alta":
             if self._estado == "apagado":
                 accion = "enfriar"
@@ -67,3 +72,14 @@ class Calefactor(Climatizador):
         self._maquina_estado.append([["apagado", "enfriar"], "apagado"])
         self._maquina_estado.append([["calentando", "apagar"], "apagado"])
         return
+
+    def _definir_accion(self, temperatura):
+        accion = None
+        if temperatura == "baja":
+            if self._estado == "apagado":
+                accion = "calentar"
+        else:
+            if self._estado == "calentando":
+                accion = "apagar"
+        print('accion:', accion)
+        return accion
