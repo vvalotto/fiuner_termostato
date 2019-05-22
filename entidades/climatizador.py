@@ -1,12 +1,16 @@
 """"
 Clase que respresenta el climatizador
 """
-
+from abc import ABCMeta, abstractmethod
 from servicios_dominio.controlador_climatizador import *
 
 
-class Climatizador:
-
+class AbsClimatizador(metaclass=ABCMeta):
+    """
+    Clase Abstracta Climatizador que generaliza el comportamiento
+    de los posibles dispositivo que sirven para cambiar la temperatura
+    de un ambiente
+    """
     @property
     def estado(self):
         return self._estado
@@ -15,9 +19,6 @@ class Climatizador:
         self._estado = "apagado"
         self._maquina_estado = []
         self._inicializar_maquina_estado()
-        self._funcionamiento_acumulado = 0
-        self._inicio_funcionamiento = None
-        return
 
     def proximo_estado(self, accion):
         estado_actual = [self._estado, accion]
@@ -27,7 +28,29 @@ class Climatizador:
                 self._estado = transicion[1]
                 return self._estado
 
-        raise("No existe proximo estado")
+        raise('No existe proximo estado')
+
+    @abstractmethod
+    def _inicializar_maquina_estado(self):
+        pass
+
+    @abstractmethod
+    def evaluar_accion(self, ambiente):
+        pass
+
+    @abstractmethod
+    def _definir_accion(self, temperatura):
+        pass
+
+
+class Climatizador(AbsClimatizador):
+    """
+    Clase climatizador: calienta y enfria el ambiente
+    """
+    def __init__(self):
+        super().__init__()
+        self._funcionamiento_acumulado = 0
+        self._inicio_funcionamiento = None
         return
 
     def _inicializar_maquina_estado(self):
@@ -38,28 +61,21 @@ class Climatizador:
         return
 
     def evaluar_accion(self, ambiente):
-        """
-        Este metodo es muy problematico!!!
-        Evalua el tipo para decidir como debe comportarse!!
-        """
-        if isinstance(self, Climatizador):
-            if self._funcionamiento_acumulado < 120:
-                temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
-                                                                          ambiente.temperatura_deseada)
-                accion = self._definir_accion(temperatura)
-                self._acumular_funcionamiento(accion)
-            else:
-                accion = "apagar"
-                self._funcionamiento_acumulado = 0
-                self._inicio_funcionamiento = None
 
-        elif isinstance(self, Calefactor):
+        if self._funcionamiento_acumulado < 120:
             temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
                                                                       ambiente.temperatura_deseada)
             accion = self._definir_accion(temperatura)
+            self._acumular_funcionamiento(accion)
+        else:
+            accion = "apagar"
+            self._funcionamiento_acumulado = 0
+            self._inicio_funcionamiento = None
+
         return accion
 
     def _definir_accion(self, temperatura):
+        accion = None
         if temperatura == "alta":
             if self._estado == "apagado":
                 accion = "enfriar"
@@ -84,9 +100,16 @@ class Climatizador:
         return
 
 
-class Calefactor(Climatizador):
+class Calefactor(AbsClimatizador):
+    """
+    Calefactor
+    """
+    def evaluar_accion(self, ambiente):
+        temperatura = ControladorTemperatura.comparar_temperatura(ambiente.temperatura_ambiente,
+                                                                  ambiente.temperatura_deseada)
+        accion = self._definir_accion(temperatura)
+        return accion
 
-    # sobreescribe el metodo que especializa
     def _inicializar_maquina_estado(self):
         self._maquina_estado.append([["apagado", "calentar"], "calentando"])
         self._maquina_estado.append([["apagado", "enfriar"], "apagado"])

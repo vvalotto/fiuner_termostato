@@ -39,4 +39,4 @@ class Configurador:
 
     @staticmethod
     def configurar_climatizador():
-        return Calefactor()
+        return Climatizador()
