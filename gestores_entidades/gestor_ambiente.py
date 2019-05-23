@@ -31,9 +31,8 @@ class GestorAmbiente:
     def obtener_temperatura_ambiente(self):
         return self._ambiente.temperatura_ambiente
 
-    def mostrar_temperatura_ambiente(self):
-        self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_ambiente)
-        return
+    def obtener_temperatura_deseada(self):
+        return self._ambiente.temperatura_deseada
 
     def aumentar_temperatura_deseada(self):
         self._ambiente.temperatura_deseada += 1
@@ -43,8 +42,13 @@ class GestorAmbiente:
         self._ambiente.temperatura_deseada -= 1
         return
 
-    def obtener_temperatura_deseada(self):
-        return self._ambiente.temperatura_deseada
+    def indicar_temperatura_a_mostrar(self, tipo_temperatura):
+        self.ambiente.temperatura_a_mostrar = tipo_temperatura
+        return
+
+    def mostrar_temperatura_ambiente(self):
+        self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_ambiente)
+        return
 
     def mostrar_temperatura_deseada(self):
         self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_deseada)
@@ -56,8 +60,3 @@ class GestorAmbiente:
         elif self._ambiente.temperatura_a_mostrar == "deseada":
             self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_deseada)
         return
-
-    def indicar_temperatura_a_mostrar(self, tipo_temperatura):
-        self.ambiente.temperatura_a_mostrar = tipo_temperatura
-        return
-

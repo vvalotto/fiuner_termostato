@@ -4,6 +4,7 @@ Clase abstracta sensor de temperatura
 from abc import ABCMeta, abstractmethod
 import socket
 
+
 class AbsProxySensorTemperatura(metaclass=ABCMeta):
 
     @abstractmethod

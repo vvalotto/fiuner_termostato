@@ -3,8 +3,6 @@ Es el componente responsable de mantener y gestionar el
 estado interno de la clase que representa la bateria real
 """
 
-
-
 from entidades.bateria import *
 from configurador.configurador import *
 
@@ -18,9 +16,7 @@ class GestorBateria:
         la clase que guarda el estado de la bateria
         la clase que expone visualmente el estado de la bateria
         """
-        self._bateria = Bateria()
-        # En tiempo de ejecución se determina que clase será la que
-        # integrara el gestor
+        self._bateria = Bateria(5, 0.80)
         self._proxy_bateria = Configurador().configurar_proxy_bateria()
         self._visualizador_bateria = Configurador.configurar_visualizador_bateria()
         return
