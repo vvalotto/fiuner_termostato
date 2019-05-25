@@ -34,15 +34,13 @@ class OperadorSecuencial:
 
         print("inicio")
 
-        # Setea la temperatura deseada por defecto
-        # (esta linea es temporal para la entrega 2
         self._gestor_ambiente.ambiente.temperatura_deseada = 24
 
         'Ciclo infinito que establece la secuencia de acciones' \
         'del termostato'
         while True:
             print("lee_bateria")
-            # Se cambia el contrato!!!!
+
             self._gestor_bateria.verificar_nivel_de_carga()
             time.sleep(1)
 

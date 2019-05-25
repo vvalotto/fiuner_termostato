@@ -7,14 +7,21 @@ from registrador.registrador import *
 import datetime
 
 
-class ActuadorClimatizador(AbsRegistrador, AbsAuditor):
+class AbsActuadorClimatizador(metaclass=ABCMeta):
+
+    @staticmethod
+    def accionar_climatizador(accion):
+        pass
+
+
+class ActuadorClimatizadorGeneral(AbsActuadorClimatizador, AbsRegistrador, AbsAuditor):
 
     @staticmethod
     def accionar_climatizador(accion):
 
         # Simula Actuador
         mensaje_accion = "accionando el climatizador"
-        ActuadorClimatizador.auditar_funcion(ActuadorClimatizador.__name__,
+        ActuadorClimatizadorGeneral.auditar_funcion(ActuadorClimatizadorGeneral.__name__,
                                     mensaje_accion,
                                     str(datetime.datetime.now()))
         try:
@@ -23,12 +30,12 @@ class ActuadorClimatizador(AbsRegistrador, AbsAuditor):
                 archivo_climatizador.close()
         except IOError:
             mensaje_error = "Error al quierer actuar en el climatizador"
-            registro_error = ActuadorClimatizador._armar_registro_error(
+            registro_error = ActuadorClimatizadorGeneral._armar_registro_error(
                 str(datetime.datetime.now()),
                 str(IOError),
                 mensaje_error)
 
-            ActuadorClimatizador.registrar_error(registro_error)
+            ActuadorClimatizadorGeneral.registrar_error(registro_error)
 
     @staticmethod
     def _armar_registro_error( fecha_hora, tipo_de_error, mensaje):

@@ -1,11 +1,19 @@
 """
 Clase que simula la lectura de un boton de seleccion
 """
+
 from registrador.registrador import *
 import datetime
 
 
-class SelectorTemperatura(AbsRegistrador):
+class AbsSelectorTemperatura(metaclass=ABCMeta):
+
+    @staticmethod
+    def obtener_selector():
+        pass
+
+
+class SelectorTemperaturaArchivo(AbsSelectorTemperatura, AbsRegistrador):
 
     @staticmethod
     def obtener_selector():
@@ -15,14 +23,14 @@ class SelectorTemperatura(AbsRegistrador):
             archivo.close()
         except IOError:
             mensaje_error = "Error al leer el tipo de temperatura"
-            registro_error = SelectorTemperatura._armar_registro_error(
-                                                        SelectorTemperatura.__name__,
-                                                        SelectorTemperatura.obtener_selector.__name__,
+            registro_error = SelectorTemperaturaArchivo._armar_registro_error(
+                                                        SelectorTemperaturaArchivo.__name__,
+                                                        SelectorTemperaturaArchivo.obtener_selector.__name__,
                                                         str(datetime.datetime.now()),
                                                         str(IOError),
                                                         mensaje_error)
 
-            SelectorTemperatura.registrar_error(registro_error)
+            SelectorTemperaturaArchivo.registrar_error(registro_error)
             raise mensaje_error
         return tipo_temperatura
 
