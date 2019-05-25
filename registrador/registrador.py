@@ -11,6 +11,8 @@ class AbsRegistrador:
     def registrar_error(registro):
         pass
 
+
+class AbsAuditor:
     @staticmethod
     @abstractmethod
     def auditar_funcion(registro):
