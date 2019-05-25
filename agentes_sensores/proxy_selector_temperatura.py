@@ -3,14 +3,8 @@ Clase que simula la lectura de un boton de seleccion
 """
 
 from registrador.registrador import *
+from servicios_aplicacion.abs_selector_temperatura import *
 import datetime
-
-
-class AbsSelectorTemperatura(metaclass=ABCMeta):
-
-    @staticmethod
-    def obtener_selector():
-        pass
 
 
 class SelectorTemperaturaArchivo(AbsSelectorTemperatura, AbsRegistrador):
