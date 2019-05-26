@@ -4,14 +4,9 @@ Aqui la acción es escribir en un archivo externo
 """
 
 from registrador.registrador import *
+from entidades.abs_actuador_climatizador import *
 import datetime
 
-
-class AbsActuadorClimatizador(metaclass=ABCMeta):
-
-    @staticmethod
-    def accionar_climatizador(accion):
-        pass
 
 
 class ActuadorClimatizadorGeneral(AbsActuadorClimatizador, AbsRegistrador, AbsAuditor):
