@@ -10,8 +10,8 @@ class GestorClimatizador:
 
     def __init__(self):
         self._climatizador = Configurador.configurar_climatizador()
-        self._actuador = Configurador().configurar_actuador_climatizador()
-        self._visualizador = Configurador().configurar_visualizador_climatizador()
+        self._actuador = Configurador.configurar_actuador_climatizador()
+        self._visualizador = Configurador.configurar_visualizador_climatizador()
         return
 
     def accionar_climatizador(self, ambiente):
