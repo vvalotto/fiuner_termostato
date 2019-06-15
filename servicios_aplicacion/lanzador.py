@@ -2,6 +2,7 @@
 Clase que inicializa el termostato
 """
 from servicios_aplicacion.operador_secuencial import *
+from servicios_aplicacion.operador_paralelo import *
 
 
 class Lanzador:
@@ -13,6 +14,9 @@ class Lanzador:
         self._presentador = Presentador(self._gestor_bateria,
                                         self._gestor_ambiente,
                                         self._gestor_climatizador)
+        self._operador_paralelo = OperadorParalelo(self._gestor_bateria,
+                                                       self._gestor_ambiente,
+                                                       self._gestor_climatizador)
 
     def ejecutar(self):
 
@@ -33,6 +37,6 @@ class Lanzador:
 
         if todo_ok:
             print("Entre en operacion")
-            OperadorSecuencial().ejecutar()
+            self._operador_paralelo.ejecutar()
 
         return

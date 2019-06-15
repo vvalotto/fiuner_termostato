@@ -17,14 +17,14 @@ from servicios_aplicacion.presentador import *
 
 class OperadorSecuencial:
 
-    def __init__(self):
+    def __init__(self, gestor_bateria, gestor_ambiente, gestor_climatizador):
         """
         Arma la dependencia con las clases con las que va
         a trabajar
         """
-        self._gestor_bateria = GestorBateria()
-        self._gestor_ambiente = GestorAmbiente()
-        self._gestor_climatizador = GestorClimatizador()
+        self._gestor_bateria = gestor_bateria
+        self._gestor_ambiente = gestor_ambiente
+        self._gestor_climatizador = gestor_climatizador
         self._selector = SelectorEntradaTemperatura(self._gestor_ambiente)
         self._presentador = Presentador(self._gestor_bateria,
                                         self._gestor_ambiente,
