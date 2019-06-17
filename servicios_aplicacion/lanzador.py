@@ -3,6 +3,7 @@ Clase que inicializa el termostato
 """
 from servicios_aplicacion.operador_secuencial import *
 from servicios_aplicacion.operador_paralelo import *
+from os import system
 
 
 class Lanzador:
@@ -21,9 +22,10 @@ class Lanzador:
     def ejecutar(self):
 
         todo_ok = True
-        print("inicio")
+        print("INICIO")
 
         self._gestor_ambiente.ambiente.temperatura_deseada = 24
+
         print("lee_bateria")
         self._gestor_bateria.verificar_nivel_de_carga()
         if self._gestor_bateria.obtener_indicador_de_carga() != "NORMAL": todo_ok = False
@@ -32,11 +34,13 @@ class Lanzador:
         self._gestor_ambiente.leer_temperatura_ambiente()
         if self._gestor_ambiente.obtener_temperatura_ambiente() is None: todo_ok = False
 
-        print("Muestra estado")
+        print("Muestra estado Termostato")
         self._presentador.ejecutar()
 
+        system("clear")
+
         if todo_ok:
-            print("Entre en operacion")
+            print("Entra en operacion")
             self._operador_paralelo.ejecutar()
 
         return

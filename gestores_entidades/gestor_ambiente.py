@@ -18,7 +18,7 @@ class GestorAmbiente:
     def __init__(self):
         self._ambiente = Ambiente()
         self._proxy_sensor_temperatura = Configurador().configurar_proxy_temperatura()
-        self._visualizador_temperatura = Configurador().configurar_visualizador_temperaturas()
+        self._visualizador_temperatura = Configurador().configurar_visualizador_temperatura()
         return
 
     def leer_temperatura_ambiente(self):
@@ -58,5 +58,5 @@ class GestorAmbiente:
         if self._ambiente.temperatura_a_mostrar == "ambiente":
             self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_ambiente)
         elif self._ambiente.temperatura_a_mostrar == "deseada":
-            self._visualizador_temperatura.mostrar_temperatura_ambiente(self._ambiente.temperatura_deseada)
+            self._visualizador_temperatura.mostrar_temperatura_deseada(self._ambiente.temperatura_deseada)
         return

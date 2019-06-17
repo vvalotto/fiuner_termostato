@@ -26,7 +26,6 @@ class Presentador:
         muestren
         """
         print("-------------- BATERIA -------------")
-        self._gestor_bateria.mostrar_nivel_de_carga()
         self._gestor_bateria.mostrar_indicador_de_carga()
         print("------------------------------------")
         print("\n")

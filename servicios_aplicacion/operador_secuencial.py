@@ -8,6 +8,7 @@ y procesos correspondientes
 """
 
 import time
+from os import system
 from gestores_entidades.gestor_bateria import *
 from gestores_entidades.gestor_ambiente import *
 from gestores_entidades.gestor_climatizador import *
@@ -32,12 +33,13 @@ class OperadorSecuencial:
 
     def ejecutar(self):
 
-        print("inicio")
+        print("Inicio")
 
         self._gestor_ambiente.ambiente.temperatura_deseada = 24
 
         'Ciclo infinito que establece la secuencia de acciones' \
         'del termostato'
+
         while True:
             print("lee_bateria")
 
@@ -56,8 +58,9 @@ class OperadorSecuencial:
             self._gestor_climatizador.accionar_climatizador(self._gestor_ambiente.ambiente)
             time.sleep(1)
 
-            print("Muestra estado")
+            print("Muestra estado del termostato")
             self._presentador.ejecutar()
             time.sleep(5)
 
+            system("clear")
         # FIN DEL BUCLE

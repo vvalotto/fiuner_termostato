@@ -35,7 +35,6 @@ class OperadorParalelo:
         while True:
             print("lee temperatura")
             self._gestor_ambiente.leer_temperatura_ambiente()
-            self._gestor_ambiente.ambiente.temperatura_deseada = 25
             time.sleep(2)
         return
 
@@ -76,9 +75,7 @@ class OperadorParalelo:
         t1.start()
         t2.start()
         t3.start()
-        time.sleep(1)
         t4.start()
-        time.sleep(5)
         t5.start()
 
         return
