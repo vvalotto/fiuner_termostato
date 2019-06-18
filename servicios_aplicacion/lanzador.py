@@ -1,6 +1,9 @@
 """
 Clase que inicializa el termostato
 """
+from gestores_entidades.gestor_bateria import *
+from gestores_entidades.gestor_ambiente import *
+from gestores_entidades.gestor_climatizador import *
 from servicios_aplicacion.operador_secuencial import *
 from servicios_aplicacion.operador_paralelo import *
 from os import system

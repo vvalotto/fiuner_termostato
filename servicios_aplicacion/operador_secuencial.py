@@ -9,9 +9,6 @@ y procesos correspondientes
 
 import time
 from os import system
-from gestores_entidades.gestor_bateria import *
-from gestores_entidades.gestor_ambiente import *
-from gestores_entidades.gestor_climatizador import *
 from servicios_aplicacion.selector_entrada import *
 from servicios_aplicacion.presentador import *
 

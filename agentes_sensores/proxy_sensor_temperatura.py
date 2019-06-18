@@ -4,6 +4,7 @@ Clase abstracta sensor de temperatura
 import socket
 from entidades.abs_sensor_temperatura import *
 
+
 class ProxySensorTemperaturaArchivo(AbsProxySensorTemperatura):
 
     def leer_temperatura(self):

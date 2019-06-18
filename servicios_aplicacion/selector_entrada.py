@@ -1,8 +1,7 @@
 """
 Clase Responsable del establecimiento de la temperatura deseada
 """
-from agentes_sensores.proxy_seteo_temperatura import *
-from agentes_sensores.proxy_selector_temperatura import *
+
 from gestores_entidades.gestor_ambiente import *
 
 
