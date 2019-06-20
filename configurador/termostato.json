@@ -1,0 +1,7 @@
+{
+  "proxy_bateria" : "archivo",
+  "proxy_sensor_temperatur" : "socket",
+  "climatizador" : "calefactor",
+  "seteo_temperatura" : "socket",
+  "visualizador_bateria" : "socket"
+}
